@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Список покупок</string>
+    <string name="sum_total">0</string>
+    <string name="action_settings">Настройки</string>
+    <string name="btn_add">+</string>
+    <string name="title_activity_add">Добавить</string>
+
+</resources>

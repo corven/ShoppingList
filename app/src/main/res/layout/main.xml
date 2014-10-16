@@ -1,0 +1,39 @@
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:text="@string/sum_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/txtSumPurchases"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textSize="25dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_add"
+        android:id="@+id/btnAddRec"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/oval_button"
+        android:onClick="onClickbtnAddRec"
+        android:textSize="70dp"
+        android:textColor="@color/blueColor" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_below="@+id/txtSumPurchases"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/btnAddRec"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp" />
+
+</RelativeLayout>
