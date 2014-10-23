@@ -23,8 +23,8 @@ public class AddActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add);
 
-        txtName = (TextView)findViewById(R.id.txtName);
-        txtPrice = (TextView)findViewById(R.id.txtPrice);
+        txtName = (TextView)findViewById(R.id.txtNameAdd);
+        txtPrice = (TextView)findViewById(R.id.txtPriceAdd);
 
         final Button addBtn = (Button)findViewById(R.id.btnAdd);
 
@@ -69,7 +69,13 @@ public class AddActivity extends Activity {
     public void onClickbtnAdd(View view) {
         Intent intent = new Intent();
         intent.putExtra(NAME, String.valueOf(txtName.getText()));
-        intent.putExtra(PRICE, String.valueOf(txtPrice.getText()));
+        String prStr = String.valueOf(txtPrice.getText());
+        if (prStr.equals("")) {
+            intent.putExtra(PRICE, String.valueOf(0));
+        }else{
+            intent.putExtra(PRICE, String.valueOf(txtPrice.getText()));
+        }
+
 
         setResult(RESULT_OK, intent);
         finish();

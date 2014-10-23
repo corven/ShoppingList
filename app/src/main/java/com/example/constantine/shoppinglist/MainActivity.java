@@ -21,8 +21,8 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    private static final int EDIT = 0, DELETE = 1, SCREEN_ADD = 0;
-    private static final String SAVED_SUM = "saved_sum";
+    private static final int EDIT = 0, DELETE = 1, SCREEN_ADD = 0, SCREEN_UPDATE = 1;
+    private static final String SAVED_SUM = "saved_sum", PRICE = "price", NAME = "name";
 
     TextView txtSumPurchases;
     List<Purchase> purchaseList = new ArrayList<Purchase>();
@@ -39,20 +39,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        txtSumPurchases = (TextView)findViewById(R.id.txtSumPurchases);
-        SPsumPurchases = getPreferences(MODE_PRIVATE);
+        sumDisplay();
 
-        String getSum = SPsumPurchases.getString(SAVED_SUM, "");
-
-        if (!getSum.isEmpty()) {
-            sumPurchases = Double.parseDouble(getSum);
-            txtSumPurchases.setText(String.valueOf(sumPurchases));
-        }else {
-            sumPurchases = 0;
-        }
-
-        Toast.makeText(getApplicationContext(), "Данные загружены",
-                Toast.LENGTH_SHORT).show();
 
         dbHandler = new DBHandler(getApplicationContext());
         purchaseListView = (ListView)findViewById(R.id.listView);
@@ -97,35 +85,47 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void sumDisplay(){
+        txtSumPurchases = (TextView)findViewById(R.id.txtSumPurchases);
+        SPsumPurchases = getPreferences(MODE_PRIVATE);
+
+        String getSum = SPsumPurchases.getString(SAVED_SUM, "");
+
+        if (!getSum.isEmpty()) {
+            sumPurchases = Double.parseDouble(getSum);
+            txtSumPurchases.setText(String.valueOf(sumPurchases));
+        }else {
+            sumPurchases = 0;
+        }
+    }
+
+    private void commitSum() {
+        ed = SPsumPurchases.edit();
+        ed.putString(SAVED_SUM, String.valueOf(sumPurchases));
+        ed.commit();
+        txtSumPurchases.setText(String.valueOf(sumPurchases));
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+        Operations operation = new Operations();
 
         if (requestCode == SCREEN_ADD & resultCode == RESULT_OK){
             String name = data.getStringExtra(AddActivity.NAME);
             String price = data.getStringExtra(AddActivity.PRICE);
 
-            Purchase purchase = new Purchase(dbHandler.getPuschaseCount(), name, Double.parseDouble(price));
-//            if (!price.equals("")) {
-//                purchase = new Purchase(dbHandler.getPuschaseCount(), name, Double.parseDouble(price));
-//            }else{
-//                purchase = new Purchase(dbHandler.getPuschaseCount(), name, 0);
-//            }
+            operation.add(name, price);
+        }
+        if (requestCode == SCREEN_UPDATE & resultCode == RESULT_OK){
+            String name = data.getStringExtra(AddActivity.NAME);
+            String price = data.getStringExtra(AddActivity.PRICE);
 
-            if (!purchaseExists(purchase)){
-                dbHandler.createPurchase(purchase);
-                purchaseList.add(purchase);
-                purchaseAdapter.notifyDataSetChanged();
-                sumPurchases += purchase.getPrice();
-
-                ed = SPsumPurchases.edit();
-                ed.putString(SAVED_SUM, String.valueOf(sumPurchases));
-                ed.commit();
-                txtSumPurchases.setText(String.valueOf(sumPurchases));
-
-                Toast.makeText(getApplicationContext(), name + " был добавлен в список",
-                        Toast.LENGTH_SHORT).show();
-            }
+            operation.update(name, price);
+        }
+        if (requestCode == SCREEN_UPDATE & resultCode == RESULT_CANCELED){
+            Purchase purchase = purchaseList.get(longClickedItemIndex);
+            sumPurchases += purchase.getPrice();
         }
     }
 
@@ -139,14 +139,14 @@ public class MainActivity extends Activity {
     }
 
     public boolean onContextItemSelected(MenuItem item){
+        Operations operation = new Operations();
         switch (item.getItemId()){
             case EDIT:
+                operation.startActivityUpdate();
                 break;
 
             case DELETE:
-                dbHandler.deletePurchase(purchaseList.get(longClickedItemIndex));
-                purchaseList.remove(longClickedItemIndex);
-                purchaseAdapter.notifyDataSetChanged();
+                operation.delete();
                 break;
         }
         return super.onContextItemSelected(item);
@@ -174,6 +174,66 @@ public class MainActivity extends Activity {
         }
     }
 
+    private class Operations {
+        protected void add(String name, String price) {
+            Purchase purchase = new Purchase(dbHandler.getPuschaseCount(), name, Double.parseDouble(price));
+
+            if (!purchaseExists(purchase)){
+                dbHandler.createPurchase(purchase);
+                purchaseList.add(purchase);
+                purchaseAdapter.notifyDataSetChanged();
+                sumPurchases += purchase.getPrice();
+
+                commitSum();
+
+                Toast.makeText(getApplicationContext(), name + " был добавлен в список",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        protected void delete() {
+            Purchase purchase = purchaseList.get(longClickedItemIndex);
+
+            dbHandler.deletePurchase(purchase);
+            purchaseList.remove(longClickedItemIndex);
+            purchaseAdapter.notifyDataSetChanged();
+
+            sumPurchases -= purchase.getPrice();
+
+            commitSum();
+
+            Toast.makeText(getApplicationContext(), purchase.getName() + " был удален из списка",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        protected void update(String name, String price) {
+            Purchase purchase = new Purchase(dbHandler.getPuschaseCount(), name, Double.parseDouble(price));
+
+            dbHandler.updatePurchase(purchase);
+            purchaseList.set(longClickedItemIndex, purchase);
+            purchaseAdapter.notifyDataSetChanged();
+
+            sumPurchases += purchase.getPrice();
+            commitSum();
+
+            Toast.makeText(getApplicationContext(), "Запись обновлена", Toast.LENGTH_SHORT).show();
+        }
+
+        private void startActivityUpdate(){
+            Purchase purchase = purchaseList.get(longClickedItemIndex);
+            Intent intent = new Intent(MainActivity.this, UpdateActivity.class);
+
+            sumPurchases -= purchase.getPrice();
+
+
+            String price = String.valueOf(purchase.getPrice());
+            intent.putExtra(NAME, purchase.getName());
+            intent.putExtra(PRICE, price);
+            startActivityForResult(intent, SCREEN_UPDATE);
+        }
+
+    }
+
     private boolean purchaseExists(Purchase purchase){
         String name = purchase.getName();
         int bookCount = purchaseList.size();
@@ -193,6 +253,8 @@ public class MainActivity extends Activity {
 
     public void onClickbtnAddRec(View view) {
         Intent intent = new Intent(MainActivity.this, AddActivity.class);
-        startActivityForResult(intent, 0);
+        startActivityForResult(intent, SCREEN_ADD);
     }
+
+
 }

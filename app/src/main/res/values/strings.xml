@@ -6,5 +6,6 @@
     <string name="action_settings">Настройки</string>
     <string name="btn_add">+</string>
     <string name="title_activity_add">Добавить</string>
+    <string name="title_activity_update">Изменить</string>
 
 </resources>

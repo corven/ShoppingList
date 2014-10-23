@@ -9,27 +9,24 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/txtNameAdd"
+        android:id="@+id/txtNameUpdate"
         android:hint="Название продукта"
         android:layout_marginTop="40dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/txtPriceAdd"
+        android:id="@+id/txtPriceUpdate"
         android:hint="Цена"
-        android:layout_marginTop="20dp"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OK"
-        android:id="@+id/btnAdd"
+        android:text="ОК"
+        android:id="@+id/btnUpdate"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:onClick="onClickbtnAdd"
-        android:enabled="false" />
-
+        android:onClick="onClickbtnUpdate" />
 </LinearLayout>

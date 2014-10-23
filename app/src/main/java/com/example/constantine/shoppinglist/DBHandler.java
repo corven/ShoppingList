@@ -50,9 +50,20 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deletePurchase(Purchase purchase){
+    public void deletePurchase(Purchase purchase) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_NAME, KEY_ID + "=?", new String[]{String.valueOf(purchase.getId())});
+        db.close();
+    }
+
+    public void updatePurchase(Purchase purchase) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, purchase.getName());
+        values.put(KEY_PRICE, purchase.getPrice());
+
+        db.update(TABLE_NAME, values, KEY_ID + "=?", new String[]{String.valueOf(purchase.getId())});
         db.close();
     }
 
