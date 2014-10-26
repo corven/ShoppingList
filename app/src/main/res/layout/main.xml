@@ -1,7 +1,8 @@
 <RelativeLayout
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#ff86ffe4">
 
     <TextView
         android:text="@string/sum_total"
@@ -14,17 +15,18 @@
         android:textSize="25dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_add"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/btnAddRec"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/oval_button"
-        android:onClick="onClickbtnAddRec"
+        android:background="@drawable/add128"
+
         android:textSize="70dp"
-        android:textColor="@color/blueColor" />
+        android:textColor="#ff000000"
+        android:onClick="onClickbtnAddRec"
+        android:layout_marginTop="10dp" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -33,6 +35,7 @@
         android:layout_below="@+id/txtSumPurchases"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:layout_above="@+id/btnAddRec" />
+        android:layout_above="@+id/btnAddRec"
+        android:background="#ffb0ffd7" />
 
 </RelativeLayout>

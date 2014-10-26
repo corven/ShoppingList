@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, view, menuInfo);
 
-//        menu.setHeaderIcon(R.drawable.pencil_icon);
+        menu.setHeaderIcon(R.drawable.pencil1);
         menu.setHeaderTitle("Опции");
         menu.add(Menu.NONE, EDIT, Menu.NONE, "Изменить");
         menu.add(Menu.NONE, DELETE, Menu.NONE, "Удалить");

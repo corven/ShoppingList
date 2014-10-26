@@ -3,9 +3,12 @@ package com.example.constantine.shoppinglist;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -27,6 +30,24 @@ public class UpdateActivity extends Activity {
 
         txtName.setText(name);
         txtPrice.setText(price);
+
+        final Button updBtn = (Button)findViewById(R.id.btnUpdate);
+        txtName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                updBtn.setEnabled(!txtName.getText().toString().trim().isEmpty());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 

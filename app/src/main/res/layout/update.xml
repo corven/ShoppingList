@@ -2,7 +2,10 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:baselineAligned="true"
+    android:background="#ff86ffe4"
+    android:weightSum="1">
 
     <EditText
         android:layout_width="match_parent"
@@ -19,14 +22,19 @@
         android:id="@+id/txtPriceUpdate"
         android:hint="Цена"
         android:inputType="numberDecimal"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="40dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ОК"
+        android:layout_width="64dp"
+        android:layout_height="60dp"
         android:id="@+id/btnUpdate"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:onClick="onClickbtnUpdate" />
+        android:onClick="onClickbtnUpdate"
+        android:background="@drawable/update1"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"
+        android:textColor="@color/blueColor"
+        android:clickable="true"
+        android:layout_weight="0.02" />
 </LinearLayout>
