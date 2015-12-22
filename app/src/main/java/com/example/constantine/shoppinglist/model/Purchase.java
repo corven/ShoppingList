@@ -1,8 +1,5 @@
-package com.example.constantine.shoppinglist;
+package com.example.constantine.shoppinglist.model;
 
-/**
- * Created by constantine on 15.10.14.
- */
 public class Purchase {
     private String name;
     private double price;

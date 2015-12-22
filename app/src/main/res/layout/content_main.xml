@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#ff86ffe4">
+    android:background="@color/background">
 
     <TextView
         android:text="@string/sum_total"
@@ -12,30 +13,17 @@
         android:id="@+id/txtSumPurchases"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:textSize="25dp" />
-
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/btnAddRec"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/add128"
-
-        android:textSize="70dp"
-        android:textColor="#ff000000"
-        android:onClick="onClickbtnAddRec"
-        android:layout_marginTop="10dp" />
+        android:textSize="25dp"
+        android:textColor="@color/text"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/lvPurchase"
         android:layout_below="@+id/txtSumPurchases"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:layout_above="@+id/btnAddRec"
-        android:background="#ffb0ffd7" />
+        android:divider="@color/blueColor"
+        android:dividerHeight="1dp"/>
 
 </RelativeLayout>

@@ -4,8 +4,9 @@
     <string name="app_name">Список покупок</string>
     <string name="sum_total">0</string>
     <string name="action_settings">Настройки</string>
-    <string name="btn_add">+</string>
+    <string name="btn_add">Добавить</string>
     <string name="title_activity_add">Добавить</string>
     <string name="title_activity_update">Изменить</string>
+    <string name="delete">Удалить</string>
 
 </resources>

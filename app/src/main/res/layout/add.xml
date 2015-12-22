@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:weightSum="1"
-    android:background="#ff86ffe4"
+    android:background="@color/background"
     android:baselineAligned="true">
 
     <EditText
@@ -25,20 +25,15 @@
         android:layout_marginTop="40dp"
         android:inputType="numberDecimal" />
 
+
     <Button
-        android:layout_width="82dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:textSize="20dp"
         android:id="@+id/btnAdd"
-        android:onClick="onClickbtnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_add"
         android:layout_gravity="center_horizontal"
-        android:singleLine="true"
-        android:layout_marginTop="30dp"
-        android:enabled="false"
-        android:background="@drawable/buyok"
-        android:layout_weight="0.02" />
+        android:background="@color/blueColor"
+        android:layout_marginTop="50dp"
+        android:enabled="false"/>
 
 </LinearLayout>

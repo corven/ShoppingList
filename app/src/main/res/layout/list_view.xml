@@ -3,7 +3,8 @@
 <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="?android:attr/activatedBackgroundIndicator">>
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,7 +18,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="10dp"
         android:text="Название "
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:textColor="@color/text"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,5 +37,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="10dp"
         android:text="Цена"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:textColor="@color/text"/>
 </RelativeLayout>
